@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="author" content="Vinay Tambey" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Math Quiz Game | Vinay Tambey</title>
-        <link href="../dist/output.css" rel="stylesheet"/>
-    </head>
 
-    <body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Vinay Tambey" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Quiz Game | Vinay Tambey</title>
+    <link href="../dist/output.css" rel="stylesheet" />
+</head>
 
-        <!-- 👇 "main" element contains all the content of the webpage, with the background image -->
-        <main class="w-full h-screen bg-[url('../assets/background.png')] bg-cover bg-no-repeat bg-center flex place-items-center	">
+<body>
 
-            <!-- 👇 Below "div" element is the container/box where the game will be played, consisting of
+    <!-- 👇 "main" element contains all the content of the webpage, with the background image -->
+    <main>
+
+        <!-- 👇 Below "div" element is the container/box where the game will be played, consisting of
              questions, input field to answer the question, score of the user and a button to submit the answer -->
-            <div class="game-box w-[60rem] h-[32rem] m-auto bg-[rgba(240,240,240,0.68)] border-solid border-[#fcddec] rounded-[2rem]">
+        <div id="game-box">
 
-            </div>
+            <!-- 👇 User-Score -->
+            <h2 id="score">
+                Score ->
+                <span id="scoreVal">5</span>
+            </h2>
 
-        </main>
+            <!-- 👇 Question -->
+            <h3 id="question">
+                What is 
+                <span id="operand2">9</span> 
+                <span id="operation">multiply</span> 
+                by <span id="operand2">10</span> ?
+            </h3>
 
-        <script src="app.js"></script>
-    </body>
+            <form method="get">
+                <!-- 👇 Input field to enter the answer -->
+                <input type="number" id="answerInp" placeholder="Enter Your Answer" name="answer" />
+                
+                <!-- 👇 Button to submit the answer -->
+                <button type="submit" id="primaryBtn">Submit</button>
+            </form>
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
 </html>
