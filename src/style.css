@@ -55,7 +55,7 @@ form #answerInp {
 }
 
 form #answerInp::placeholder {
-    @apply opacity-5;
+    @apply opacity-0;
 }
 
 form #answerInp:focus {
@@ -68,7 +68,11 @@ form #answerInp:focus ~ label, form #answerInp:not(:placeholder-shown) ~ label {
 }
 
 form #primaryBtn {
-    @apply h-[4.6rem] px-[2rem] bg-[var(--primary)] rounded-2xl border-none	text-white text-[3.2rem];
+    @apply h-[4.6rem] px-[2rem] bg-[var(--primary)] rounded-2xl border-none	text-white text-[3.2rem] transition-all;
+}
+
+form #primaryBtn:hover {
+    @apply scale-110 shadow-2xl shadow-black;
 }
 
 @media (max-width: 768px) {
