@@ -47,7 +47,7 @@ form .inp-container {
 }
 
 form label {
-    @apply text-[2rem] text-black absolute top-2/4 translate-y-[-50%] left-[1.5rem] p-0 border-0 transition-all cursor-text leading-7;
+    @apply text-[2rem] text-black absolute top-2/4 translate-y-[-50%] left-[1.5rem] p-0 border-0 transition-all duration-300 cursor-text leading-7;
 }
 
 form #answerInp {
@@ -64,11 +64,11 @@ form #answerInp:focus {
 }
 
 form #answerInp:focus ~ label, form #answerInp:not(:placeholder-shown) ~ label {
-    @apply translate-y-[-175%] bg-[var(--primary)] text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
+    @apply translate-y-[-165%] bg-[var(--primary)] text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
 }
 
 form #primaryBtn {
-    @apply h-[4.6rem] px-[2rem] bg-[var(--primary)] rounded-2xl border-none	text-white text-[3.2rem] transition-all;
+    @apply h-[4.6rem] mt-4 px-[2rem] bg-[var(--primary)] rounded-2xl border-none text-white text-[3.2rem] transition-all duration-300;
 }
 
 form #primaryBtn:hover {
