@@ -42,20 +42,32 @@ form {
     @apply w-full flex flex-col gap-8 justify-center items-center;
 }
 
-#answerInp {
-    @apply h-[4rem] p-[2rem] border-[0.1rem] border-solid border-black rounded-lg text-[2rem] bg-transparent;
+form .inp-container {
+    @apply relative;
 }
 
-#answerInp::placeholder {
-    @apply text-[2rem] text-black;
+form label {
+    @apply text-[2rem] text-black absolute top-2/4 translate-y-[-50%] left-[1.5rem] p-0 border-0 transition-all cursor-text leading-7;
 }
 
-#answerInp:focus {
+form #answerInp {
+    @apply h-[4rem] px-[1.5rem] py-[2rem] border-[0.1rem] border-solid border-black rounded-lg text-[2rem] bg-transparent;
+}
+
+form #answerInp::placeholder {
+    @apply opacity-5;
+}
+
+form #answerInp:focus {
     outline: 1px solid var(--primary);
     border: 1px solid var(--primary);
 }
 
-#primaryBtn {
+form #answerInp:focus ~ label, form #answerInp:not(:placeholder-shown) ~ label {
+    @apply translate-y-[-175%] bg-[var(--primary)] text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
+}
+
+form #primaryBtn {
     @apply h-[4.6rem] px-[2rem] bg-[var(--primary)] rounded-2xl border-none	text-white text-[3.2rem];
 }
 
@@ -68,6 +80,10 @@ form {
 @media (max-width: 630px) {
     html {
         font-size: 45%;
+    }
+
+    form #answerInp ~ label {
+        @apply leading-[1.65rem];
     }
 }
 
