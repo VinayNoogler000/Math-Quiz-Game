@@ -76,6 +76,10 @@ form #answerInp:focus ~ label, form #answerInp:not(:placeholder-shown) ~ label {
     @apply translate-y-[-165%] bg-black	text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
 }
 
+form #answerInp:focus ~ label {
+    @apply bg-[var(--primary)];
+}
+
 form #primaryBtn {
     @apply h-[4.6rem] mt-4 px-[2rem] bg-[var(--primary)] rounded-2xl border-none text-white text-[3.2rem] transition-all duration-300;
 }
