@@ -6,6 +6,7 @@
 
 :root {
     --primary: #8f00ff;
+    --secondary: rgba(240,240,240,0.68);
 }
 
 * {
@@ -21,21 +22,29 @@ html {
 }
 
 main {
-    @apply w-full h-screen bg-[url('../assets/background.png')] bg-cover bg-no-repeat bg-center flex place-items-center
+    @apply w-full h-screen bg-[url('../assets/background.png')] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center gap-12;
+}
+
+h1, h2, h3, button {
+    @apply selection:bg-black selection:text-white;
+}
+
+h1 {
+    @apply font-bold text-[5rem] leading-[3.5rem] text-[var(--primary)] bg-[var(--secondary)] p-6 rounded-xl;
 }
 
 #game-box {
-    @apply w-[60rem] h-[32rem] m-auto bg-[rgba(240,240,240,0.68)] p-[5rem] border-solid border-[#fcddec] rounded-[2rem] text-[1.6rem] flex flex-col justify-center items-center gap-8;
+    @apply w-[60rem] h-[32rem] mx-auto bg-[var(--secondary)] p-[5rem] border-solid border-[#fcddec] rounded-[2rem] text-[1.6rem] flex flex-col justify-center items-center gap-10;
     border-width: 0px 0.2rem 0.1rem 0px;
     box-shadow: 0px 19px 41px rgba(0, 0, 0, 0.36);
 }
 
 #score {
-    @apply font-bold text-[2.8rem] leading-[3.5rem] text-[var(--primary)];
+    @apply font-bold text-[2.8rem] leading-[3rem];
 }
 
 #question {
-    @apply font-semibold text-[3rem] leading-[4.5rem];
+    @apply font-semibold text-[3rem] leading-[3.5rem] mt-[-0.75rem] text-[var(--primary)];
 }
 
 form {
@@ -64,7 +73,7 @@ form #answerInp:focus {
 }
 
 form #answerInp:focus ~ label, form #answerInp:not(:placeholder-shown) ~ label {
-    @apply translate-y-[-165%] bg-[var(--primary)] text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
+    @apply translate-y-[-165%] bg-black	text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
 }
 
 form #primaryBtn {
@@ -94,5 +103,9 @@ form #primaryBtn:hover {
 @media (max-width: 510px) {
     html {
         font-size: 35%;
+    }
+
+    form #answerInp ~ label {
+        @apply leading-[1.5rem];
     }
 }
