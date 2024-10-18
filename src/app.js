@@ -179,12 +179,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         else if(userReplyToPrompt.toLowerCase() === "delete") { //when, user wants to delete the stored score
-            isUserStoringScore = false;
+            isUserStoringScore = false; //Reset the flag
             localStorage.removeItem("score");
             scoreValEl.innerText = score = 0;
         }
         else { //when, user entered an invalid value, other than "YES", "NO", or "DELETE"
-            displayToast("redColor", 2000, "Invalid Reply! Please, Enter YES or NO, only.");
+            displayToast("redColor", 2000, "Invalid Reply! Please, Enter YES, NO or DELETE, only.");
             setTimeout(() => showScoreStoragePrompt(scoreStoragePromptMsg), 2100);
         }
     }

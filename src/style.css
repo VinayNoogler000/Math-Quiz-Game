@@ -4,127 +4,137 @@
 @tailwind utilities;
 
 
-:root {
-    --primary: #8f00ff;
-    --secondary: rgba(240,240,240,0.68);
-}
-
-* {
-    padding: 0;
-    border: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: "Poppins", sans-serif;
-    font-size: 62.5%; /*To make 1rem == 10px */
-}
-
-main {
-    @apply w-full h-screen bg-[url('../assets/background.png')] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center gap-12;
-}
-
-h1, h2, h3, button {
-    @apply selection:bg-black selection:text-white;
-}
-
-h1 {
-    @apply font-bold text-[5rem] leading-[3.5rem] text-[var(--primary)] bg-[var(--secondary)] p-6 rounded-xl;
-}
-
-#game-box {
-    @apply w-[60rem] h-[32rem] mx-auto bg-[var(--secondary)] p-[5rem] border-solid border-[#fcddec] rounded-[2rem] text-[1.6rem] flex flex-col justify-center items-center gap-10;
-    border-width: 0px 0.2rem 0.1rem 0px;
-    box-shadow: 0px 19px 41px rgba(0, 0, 0, 0.36);
-}
-
-#score {
-    @apply font-bold text-[2.8rem] leading-[3rem] relative;
-}
-
-#scoreUpd {
-    @apply absolute right-[-0.5rem] opacity-0 text-[2.4rem] text-white px-[0.5rem] py-[0.25rem] rounded-xl translate-y-[-50%]; 
-}
-
-@keyframes scoreUpdation {
-    0% {
-        transform: translateY(-50%) scale(1); 
-        opacity: 1;
+@layer base {
+    :root {
+        --primary: #8f00ff;
+        --secondary: rgba(240,240,240,0.68);
     }
-    100% {
-        transform: translateY(-150%) scale(0.5); 
-        opacity: 0;
+    
+    * {
+        padding: 0;
+        border: 0;
+        margin: 0;
+        box-sizing: border-box;
     }
-}
-
-#question {
-    @apply font-semibold text-[3rem] leading-[3.5rem] mt-[-0.75rem] text-[var(--primary)];
-}
-
-form {
-    @apply w-full flex flex-col gap-8 justify-center items-center;
-}
-
-form .inp-container {
-    @apply relative;
-}
-
-form label {
-    @apply text-[2rem] text-black absolute top-2/4 translate-y-[-50%] left-[1.5rem] p-0 border-0 transition-all duration-300 cursor-text leading-7;
-}
-
-form #answerInp {
-    @apply h-[4rem] px-[1.5rem] py-[2rem] border-[0.1rem] border-solid border-black rounded-lg text-[2rem] bg-transparent;
-}
-
-form #answerInp::placeholder {
-    @apply opacity-0;
-}
-
-form #answerInp:focus {
-    outline: 1px solid var(--primary);
-    border: 1px solid var(--primary);
-}
-
-form #answerInp:focus ~ label, form #answerInp:not(:placeholder-shown) ~ label {
-    @apply translate-y-[-165%] bg-black	text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
-}
-
-form #answerInp:focus ~ label {
-    @apply bg-[var(--primary)];
-}
-
-form #primaryBtn {
-    @apply h-[4.6rem] mt-4 px-[2rem] bg-[var(--primary)] rounded-2xl border-none text-white text-[3.2rem] transition-all duration-300;
-}
-
-form #primaryBtn:hover {
-    @apply scale-110 shadow-2xl shadow-black;
-}
-
-@media (max-width: 768px) {
+    
     html {
-        font-size: 55%;
+        font-family: "Poppins", sans-serif;
+        font-size: 62.5%; /*To make 1rem == 10px */
+    } 
+
+    
+    main {
+        @apply w-full h-screen bg-[url('../assets/background.png')] bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center gap-12;
+    }
+    
+    h1, h2, h3, button {
+        @apply selection:bg-black selection:text-white;
+    }  
+
+    h1 {
+        @apply font-bold text-[5rem] leading-[3.5rem] text-[var(--primary)] bg-[var(--secondary)] p-6 rounded-xl;
+    }
+
+    @media (max-width: 768px) {
+        html {
+            font-size: 55%;
+        }
+    }
+    
+    @media (max-width: 630px) {
+        html {
+            font-size: 45%;
+        }
+    }
+    
+    @media (max-width: 510px) {
+        html {
+            font-size: 35%;
+        }
     }
 }
 
-@media (max-width: 630px) {
-    html {
-        font-size: 45%;
+@layer components {
+    #game-box {
+        @apply w-[60rem] h-[32rem] mx-auto bg-[var(--secondary)] p-[5rem] border-solid border-[#fcddec] rounded-[2rem] text-[1.6rem] flex flex-col justify-center items-center gap-10;
+        border-width: 0px 0.2rem 0.1rem 0px;
+        box-shadow: 0px 19px 41px rgba(0, 0, 0, 0.36);
+    }
+    
+    #score {
+        @apply font-bold text-[2.8rem] leading-[3rem] relative;
+    }
+    
+    #scoreUpd {
+        @apply absolute right-[-0.5rem] opacity-0 text-[2.4rem] text-white px-[0.5rem] py-[0.25rem] rounded-xl translate-y-[-50%]; 
     }
 
-    form #answerInp ~ label {
-        @apply leading-[1.65rem];
+    @keyframes scoreUpdation {
+        0% {
+            transform: translateY(-50%) scale(1); 
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-150%) scale(0.5); 
+            opacity: 0;
+        }
     }
-}
 
-@media (max-width: 510px) {
-    html {
-        font-size: 35%;
+    #question {
+        @apply font-semibold text-[3rem] leading-[3.5rem] mt-[-0.75rem] text-[var(--primary)];
+    }
+    
+    form {
+        @apply w-full flex flex-col gap-8 justify-center items-center;
+    }
+    
+    form .inp-container {
+        @apply relative;
+    }
+    
+    form label {
+        @apply text-[2rem] text-black absolute top-2/4 translate-y-[-50%] left-[1.5rem] p-0 border-0 transition-all duration-300 cursor-text leading-7;
+    }
+    
+    form #answerInp {
+        @apply h-[4rem] px-[1.5rem] py-[2rem] border-[0.1rem] border-solid border-black rounded-lg text-[2rem] bg-transparent;
+    }
+    
+    form #answerInp::placeholder {
+        @apply opacity-0;
+    }
+    
+    form #answerInp:focus {
+        outline: 1px solid var(--primary);
+        border: 1px solid var(--primary);
+    }
+    
+    form #answerInp:focus ~ label, form #answerInp:not(:placeholder-shown) ~ label {
+        @apply translate-y-[-165%] bg-black	text-white text-[1.5rem] p-1 py-px rounded-md left-[1.5rem];
+    }
+    
+    form #answerInp:focus ~ label {
+        @apply bg-[var(--primary)];
+    }
+    
+    form #primaryBtn {
+        @apply h-[4.6rem] mt-4 px-[2rem] bg-[var(--primary)] rounded-2xl border-none text-white text-[3.2rem] transition-all duration-300;
     }
 
-    form #answerInp ~ label {
-        @apply leading-[1.5rem];
+    form #primaryBtn:hover {
+        @apply scale-110 shadow-2xl shadow-black;
+    }
+    
+
+    @media (max-width: 630px) {
+        form #answerInp ~ label {
+            @apply leading-[1.65rem];
+        }
+    }
+    
+    @media (max-width: 510px) {
+        form #answerInp ~ label {
+            @apply leading-[1.5rem];
+        }
     }
 }
