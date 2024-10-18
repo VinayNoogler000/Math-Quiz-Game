@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let questionArr = generateQuestion();
     let correctAns = calculateAns(questionArr[0], questionArr[1], questionArr[2]);
     let wrongAnsCount = 0;
-    const scoreStoragePromptMsg = "Do you want to Save your Score?\n-Enter 'Yes' to Store the Score.\n-Enter 'No' to Deny Storing the Score.\n-Enter 'Delete' to Remove the Stored Score.\n-Click 'Cancel' button, if you want to Store the Score, But the Score is Already Stored.\n\nUsage:\nThis Feature will Allow you to Continue your Game from the Same Score, where you Quit at the Last Game Session, even if you Close the Website/Browser.";
+    const scoreStoragePromptMsg = "Do you want to Save your Score?\n-Enter 'Yes' to Store the Score.\n-Enter 'No' to Deny Storing the Score.\n-Enter 'Delete' to Remove the Stored Score.\n-Click 'Cancel' button, If the Score is Already Stored.\n\nUsage:\nThis Feature will Allow you to Continue your Game from the Same Score, where you Quit at the Last Game Session, even if you Close the Website/Browser.";
     let isUserStoringScore = false; //variable to track that the user wants to locally store the score or not.
 
     // Handling Form (Answer) Submit Event, by Updating the Game-Box:
