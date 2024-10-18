@@ -55,26 +55,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateScore = (isAnsCorrect) => {
         if(isAnsCorrect) { //Increment the Score by 3
             score += 3;
-            localStorage.setItem("score", score); //update the locally stored 'score'
-            scoreValEl.innerText = score;
-            modifyScoreUpdEl(true);
+            scoreValEl.innerText = score; //display the updated 'score' variable in the webpage.
+            displayToast("greenColor", 2000, "Hurrah!🥳 Your Answer is Correct.\nLet's Move to the Next Question.");
+            showScoreUpdEl(true);
             updateGameBoxEls();
         }
         else { // Decrement the Score by 1, and Update the Wrong Answers Count:
-            localStorage.setItem("score", --score); //update the locally stored 'score'
-            scoreValEl.innerText = score;
-            modifyScoreUpdEl(false);
+            scoreValEl.innerText = --score;
+            showScoreUpdEl(false);
             wrongAnsCount++;
 
             // When "wrongAnsCount" has crossed the limit of 3, then Generate a New Question, by calling "updateGameBox()":
             if(wrongAnsCount < 3) {
-                alert("You've entered wrong answer. Please, retry again!");
+                displayToast("redColor", 2000, "Oops!😓 You've Entered Wrong Answer.\nPlease, Retry Again.");
             }
             else {
-                alert(`YOU'VE ENTERED THE WRONG ANSWER, THRICE.\nThe Correct Answer is ${correctAns}.\nLet's Move On to the Next Question...!\n\n*Note: If the question asks you to perform division operation, then the answer should be rounded to two decimal places (only, if the answer contains decimal values).`);
+                displayToast("redColor", 8000, `YOU'VE ENTERED THE WRONG ANSWER, THRICE.\nThe Correct Answer is ${correctAns}.\nLet's Move On to the Next Question...!\n\n*Note*\nIf the question asks you to perform division operation, then the answer should be rounded to two decimal places (only, if the answer contains decimal values).`);
                 updateGameBoxEls(); 
             }
         }
+        localStorage.setItem("score", score); //update the locally stored 'score' key
+    }
+
+    //Function to display a toast(or a notification) on a specific condition, by using Toastify-js library.
+    const displayToast = (background, timeDurationInMs, msg) => {
+        if(background === "greenColor") {
+            bgColor = "linear-gradient(to right, #00b09b, #96c93d)";
+        }
+        else {
+            bgColor = "linear-gradient(to right, #e33217, #ff001e)";
+        }
+
+        Toastify({
+            text: msg,
+            className: "info",
+            gravity: "top",
+            duration: timeDurationInMs, //parameter means, time duration in milliseconds.
+            position: "center",
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              fontSize: "1.5rem",
+              background: bgColor,
+              textAlign: "center",
+              cursor: "default",
+              maxWidth: "50rem",
+            }
+        }).showToast();
     }
 
     const generateRandomNum = (start, end) => {
@@ -98,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return operation;
     }
 
-    const modifyScoreUpdEl = (isAnsCorrect) => {
+    const showScoreUpdEl = (isAnsCorrect) => {
         /* Animation Removal & Reflow technique is used to avoid any unexpected behaviour, 
         when the animations are added & removed, rapidly, on user interactions. */
         scoreUpdEl.classList.remove("animate-[scoreUpdation_1s_ease-out_0s_1_normal]"); //Animation Removal
@@ -132,15 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
         userReplyToPrompt = prompt(message);
         
         if(userReplyToPrompt === null || userReplyToPrompt.toLowerCase() === "no") {
-            console.log("User Don't Want to Store the Score.");
+            return;
         }
         else if(userReplyToPrompt.toLowerCase() === "yes") { //when, user wants to store the score
             if(localStorage.getItem("score") === null) {
                 localStorage.setItem("score", score);
             }
             else { //when, user wants to store the score, but the score is already stored
-                alert("Invalid Reply! Your Score is Already Stored.");
-                showScoreStoragePrompt(scoreStoragePromptMsg);
+                displayToast("redColor", 2000, "Invalid Reply! Your Score is Already Stored.");
+                setTimeout(() => showScoreStoragePrompt(scoreStoragePromptMsg), 2100);
             }
         }
         else if(userReplyToPrompt.toLowerCase() === "delete") { //when, user wants to delete the stored score
@@ -148,9 +174,8 @@ document.addEventListener("DOMContentLoaded", () => {
             scoreValEl.innerText = score = 0;
         }
         else { //when, user entered an invalid value, other than "YES", "NO", or "DELETE"
-            console.log("Invalid Reply for Score Storage Prompt!");
-            alert("Invalid Reply! Please, Enter YES or NO, only.");
-            showScoreStoragePrompt(scoreStoragePromptMsg);
+            displayToast("redColor", 2000, "Invalid Reply! Please, Enter YES or NO, only.");
+            setTimeout(() => showScoreStoragePrompt(scoreStoragePromptMsg), 2100);
         }
     }
 
@@ -173,7 +198,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    //Display "score-storage" prompt, after 0.5s:
     setTimeout( () => {
         showScoreStoragePrompt(scoreStoragePromptMsg);
-    }, 500); //after 0.5s "score-storage" prompt will be displayed.
+    }, 500); 
 });
