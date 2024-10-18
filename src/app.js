@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const questionEl = document.querySelector("#question");
     const formEl = document.querySelector("form");
     const userInpEl = formEl.querySelector("#answerInp");
-    const scoreStoragePromptMsg = "Do you want to Save your Score?\n-Enter 'Yes' to Store the Score.\n-Enter 'No' or Click 'Cancel' button to Deny Storing the Score, or If the Score is Already Stored.\n-Enter 'Delete' to Remove the Stored Score.\n\nUsage:\nThis Feature will Allow you to Continue your Game from the Same Score, where you Quit at the Last Game Session, even if you Close the Website/Browser.";
 
     const generateQuestion = () => {
         // Generate Two Random Operands and One Random Operation:
@@ -56,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if(isAnsCorrect) { //Increment the Score by 3
             score += 3;
             scoreValEl.innerText = score; //display the updated 'score' variable in the webpage.
-            displayToast("greenColor", 2000, "Hurrah!🥳 Your Answer is Correct.\nLet's Move to the Next Question.");
             showScoreUpdEl(true);
+            displayToast("greenColor", 2000, "Hurrah!🥳 Your Answer is Correct.\nLet's Move to the Next Question.");
             updateGameBoxEls();
         }
         else { // Decrement the Score by 1, and Update the Wrong Answers Count:
@@ -67,14 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // When "wrongAnsCount" has crossed the limit of 3, then Generate a New Question, by calling "updateGameBox()":
             if(wrongAnsCount < 3) {
-                displayToast("redColor", 2000, "Oops!😓 You've Entered Wrong Answer.\nPlease, Retry Again.");
+                displayToast("redColor", 2000, "Oops!😓 Your Answer is Wrong.\nPlease, Retry Again.");
             }
             else {
                 displayToast("redColor", 8000, `YOU'VE ENTERED THE WRONG ANSWER, THRICE.\nThe Correct Answer is ${correctAns}.\nLet's Move On to the Next Question...!\n\n*Note*\nIf the question asks you to perform division operation, then the answer should be rounded to two decimal places (only, if the answer contains decimal values).`);
                 updateGameBoxEls(); 
             }
         }
-        localStorage.setItem("score", score); //update the locally stored 'score' key
+
+        //Condition to fix the bug in which the score was getting scored, even when user denied to store it locally.
+        if(isUserStoringScore) {
+            localStorage.setItem("score", score); //update the locally stored 'score' key
+        }
     }
 
     //Function to display a toast(or a notification) on a specific condition, by using Toastify-js library.
@@ -157,10 +160,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const showScoreStoragePrompt = (message) => {
         userReplyToPrompt = prompt(message);
         
-        if(userReplyToPrompt === null || userReplyToPrompt.toLowerCase() === "no") {
+        if(userReplyToPrompt === null) { //when, user clicked "cancel" btn, because the score is already stored
+            isUserStoringScore = true;
             return;
         }
+        else if(userReplyToPrompt.toLowerCase() === "no") { //when, user don't wants to store the score
+            isUserStoringScore = false;
+        }
         else if(userReplyToPrompt.toLowerCase() === "yes") { //when, user wants to store the score
+            isUserStoringScore = true;
+
             if(localStorage.getItem("score") === null) {
                 localStorage.setItem("score", score);
             }
@@ -170,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         else if(userReplyToPrompt.toLowerCase() === "delete") { //when, user wants to delete the stored score
+            isUserStoringScore = false;
             localStorage.removeItem("score");
             scoreValEl.innerText = score = 0;
         }
@@ -179,12 +189,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Initialization of Game-Box [Score & Question]:
+    // Initialization of Variables:
     let score = localStorage.getItem("score") === null ? 0 : parseInt(localStorage.getItem("score"));
     scoreValEl.innerText = score; //to display the locally stored "score" [if exists].
     let questionArr = generateQuestion();
     let correctAns = calculateAns(questionArr[0], questionArr[1], questionArr[2]);
-    let wrongAnsCount = 0; 
+    let wrongAnsCount = 0;
+    const scoreStoragePromptMsg = "Do you want to Save your Score?\n-Enter 'Yes' to Store the Score.\n-Enter 'No' to Deny Storing the Score.\n-Enter 'Delete' to Remove the Stored Score.\n-Click 'Cancel' button, if you want to Store the Score, But the Score is Already Stored.\n\nUsage:\nThis Feature will Allow you to Continue your Game from the Same Score, where you Quit at the Last Game Session, even if you Close the Website/Browser.";
+    let isUserStoringScore = false; //variable to track that the user wants to locally store the score or not.
 
     // Handling Form (Answer) Submit Event, by Updating the Game-Box:
     formEl.addEventListener("submit", (event) => {
