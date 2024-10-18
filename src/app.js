@@ -88,16 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(isAnsCorrect) { //then, modify the text content, make the text green, and apply animation to the element:
             scoreUpdEl.innerText = "+3";
-            scoreUpdEl.classList.add("text-green-400", "animate-[scoreUpdation_1s_ease-out_0s_1_normal]");
+            scoreUpdEl.classList.add("bg-[#0ADD08]", "animate-[scoreUpdation_1s_ease-out_0s_1_normal]");
         }
         else { //then, modify the text content, make the text red, and apply animation to the element.
             scoreUpdEl.innerText = "-1";
-            scoreUpdEl.classList.add("text-red-600", "animate-[scoreUpdation_1s_ease-out_0s_1_normal]");
+            scoreUpdEl.classList.add("bg-red-600", "animate-[scoreUpdation_1s_ease-out_0s_1_normal]");
         }
 
         // Remove the text-colors and the animation, when, once the animation ends:
         scoreUpdEl.addEventListener('animationend', () => {
-            scoreUpdEl.classList.remove("text-green-400", "text-red-600", "animate-[scoreUpdation_1s_ease-out_0s_1_normal]"); 
+            scoreUpdEl.classList.remove("[bg-[#0ADD08]", "bg-red-600", "animate-[scoreUpdation_1s_ease-out_0s_1_normal]"); 
         });
     }
 
