@@ -51,6 +51,10 @@
         html {
             font-size: 35%;
         }
+
+        h1{
+            @apply mt-[-20rem];
+        }
     }
 }
 
