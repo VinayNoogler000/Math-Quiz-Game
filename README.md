@@ -21,7 +21,7 @@ An engaging web-based math quiz game built with vanilla JavaScript that challeng
 
 ## 🚀 Live Demo
 
-Experience the game live: [Math Quiz Game](https://math-quiz-game-by-vinay-tambey.b-cdn.net/)
+Experience the game live: [Math Quiz Game](https://math-quiz-game-vt.vercel.app/)
 
 ## 📸 Screenshots
 
