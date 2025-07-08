@@ -721,10 +721,6 @@ form{
   gap: 2rem;
 }
 
-form .inp-container{
-  position: relative;
-}
-
 form label{
   position: absolute;
   top: 50%;
